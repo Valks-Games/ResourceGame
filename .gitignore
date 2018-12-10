@@ -1,4 +1,3 @@
 .import/
-ClickerGame.exe
-ClickerGame.pck
-something
+*.exe
+*.pck
