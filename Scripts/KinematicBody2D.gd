@@ -2,13 +2,14 @@ extends KinematicBody2D
 
 const Utils = preload("res://Scripts/Utils.gd");
 
+var velocity;
+
 var tree
 var treeSprite
 
 var townhall
 var townhallSprite
 
-var velocity
 var speed
 var findResources
 
@@ -31,7 +32,7 @@ func _ready():
 	
 	add_to_group("Workers")
 	
-func _init():
+	#set_physics_process(true);
 	speed = 30
 	findResources = true
 	harvestResourceTimer = 0
@@ -39,18 +40,32 @@ func _init():
 	dumpResourceTimer = 0
 	dumpResourceTimeLength = 1
 	worker = load("res://Scenes/Worker.tscn")
-
-func compute_allignment():
+	
+	velocity = Vector2()
+	
+func _init():
+	pass
+	
+func compute_alignment():
 	var vector = Vector2()
 	var workers = get_tree().get_nodes_in_group("Workers")
-	for worker in workers:
-		print(worker.velocity.x)
+	for my_worker in workers:
+		vector.x += my_worker.velocity.x # Invalid get index 'x' (on base: 'Nil')
+		vector.y += my_worker.velocity.y
+	vector.x /= workers.size()
+	vector.y /= workers.size()
+	vector.normalized()
+	return vector
 	
+func compute_cohesion():
+	pass
+
+func compute_separation():
+	pass
+		
 func ai(delta):
 	velocity = Vector2()
-
-	compute_allignment()
-
+	
 	# Search for nearest resource.
 	if findResources:
 		if position.distance_to(tree.position) < treeSprite.texture.get_width() + 1:
@@ -80,3 +95,4 @@ func ai(delta):
 func _physics_process(delta):
 	ai(delta)
 	move_and_slide(velocity)
+	print(compute_alignment())
