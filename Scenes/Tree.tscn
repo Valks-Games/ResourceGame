@@ -3,11 +3,7 @@
 [ext_resource path="res://Scripts/Tree.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/tree.png" type="Texture" id=2]
 
-
-
-
-
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 10.0
@@ -29,6 +25,6 @@ texture = ExtResource( 2 )
 
 position = Vector2( 0.302683, 0.635492 )
 scale = Vector2( 1.50777, 1.44978 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 
