@@ -1,94 +1,72 @@
 extends KinematicBody2D
 
-const Utils = preload("res://Scripts/Utils.gd");
+const Utils = preload("res://Scripts/Utils.gd")
 
-var miningTex;
-var baseTex;
+onready var miningTex = preload("res://Sprites/worker_mining.png")
+onready var baseTex = preload("res://Sprites/worker_return_to_base.png")
 
-var velocity;
+onready var velocity = Vector2();
 
-var tree
-var treeSprite
+onready var tree = get_parent().get_node("Tree")
+onready var treeSprite = tree.get_node("TreeSprite")
 
-var townhall
-var townhallSprite
+onready var townhall = get_parent().get_node("Townhall")
+onready var townhallSprite = townhall.get_node("TownhallSprite")
 
-var speed
-var findResources
+onready var speed = 30
+onready var findResources = true
 
-var harvestResourceTimer
-var harvestTime
+onready var harvestResourceTimer = 0
+onready var harvestTime = 0.5
 
-var dumpResourceTimer
-var dumpResourceTimeLength
+onready var dumpResourceTimer = 0
+onready var dumpResourceTimeLength = 0.5
 
-var worker;
-var workerSprite
-
-var workers;
+onready var worker = load("res://Scenes/Worker.tscn")
+onready var workerSprite = get_node("WorkerSprite")
 
 func _ready():
-	miningTex = preload("res://Sprites/worker_mining.png")
-	baseTex = preload("res://Sprites/worker_return_to_base.png")
-	
-	tree = get_parent().get_node("Tree");
-	treeSprite = tree.get_node("TreeSprite")
-	
-	townhall = get_parent().get_node("Townhall")
-	townhallSprite = townhall.get_node("TownhallSprite")
-	
 	add_to_group("Workers")
 	
-	#set_physics_process(true);
-	speed = 30
-	findResources = true
-	harvestResourceTimer = 0
-	harvestTime = 0.5
-	dumpResourceTimer = 0
-	dumpResourceTimeLength = 0.5
-	worker = load("res://Scenes/Worker.tscn")
-	
-	workerSprite = get_node("WorkerSprite")
-	
-	workers = Array()
-	velocity = Vector2()
-	
-func _init():
-	pass
+func harvest_resources(delta):
+	# Harvest resources for 'harvestTime' seconds.
+	harvestResourceTimer += 1 * delta
+	workerSprite.texture = miningTex
+	if harvestResourceTimer >= harvestTime:
+		harvestResourceTimer = 0
+		# We are finished gathering all the resources we can carry.
+		findResources = false
+		
+func drop_off_resources(delta):
+	# Dump resources into base.
+	dumpResourceTimer += 1 * delta
+	workerSprite.texture = baseTex
+	if dumpResourceTimer >= dumpResourceTimeLength:
+		# Resume previous task.
+		dumpResourceTimer = 0
+		findResources = true
+		townhall.addWood(1)
+		if (get_tree().get_nodes_in_group("Workers").size() < townhall.max_workers):
+			get_parent().add_child(worker.instance())
 	
 func ai(delta):
-	velocity = Vector2()
+	velocity = Vector2() # Reset the vector every frame
 	
 	# Search for nearest resource.
 	if findResources:
 		if position.distance_to(tree.position) < treeSprite.texture.get_width() + 1:
-			# Harvest resources for 'harvestTime' seconds.
-			harvestResourceTimer += 1 * delta
-			workerSprite.texture = miningTex
-			if harvestResourceTimer >= harvestTime:
-				harvestResourceTimer = 0
-				# We are finished gathering all the resources we can carry.
-				findResources = false
+			harvest_resources(delta)
 		else:
 			# Find the nearest tree and move towards it.
-			velocity += Utils.calc_target_velocity(position, tree.position, speed);
+			velocity += Utils.calc_target_velocity(position, tree.position, speed)
 	else:
 		# We are coming back to base with resources.
 		if position.distance_to(townhall.position) < townhallSprite.texture.get_width() + 1:
-			# Dump resources into base.
-			dumpResourceTimer += 1 * delta
-			workerSprite.texture = baseTex
-			if dumpResourceTimer >= dumpResourceTimeLength:
-				# Resume previous task.
-				dumpResourceTimer = 0
-				findResources = true
-				townhall.addWood(1)
-				get_parent().add_child(worker.instance())
+			drop_off_resources(delta)
 		else:
 			# Move to nearest townhall.
-			velocity += Utils.calc_target_velocity(position, townhall.position, speed);
+			velocity += Utils.calc_target_velocity(position, townhall.position, speed)
 
 func _physics_process(delta):
 	ai(delta)
-	
 	move_and_slide(velocity)

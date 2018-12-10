@@ -7,7 +7,7 @@
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="Townhall" type="KinematicBody2D"]
+[node name="Townhall" type="KinematicBody2D" index="0"]
 
 position = Vector2( 57.7964, 163.389 )
 input_pickable = false
