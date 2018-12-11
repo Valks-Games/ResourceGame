@@ -11,7 +11,7 @@ dest_files=[ "res://.import/townhall.png-2c35b3c2bc80df2535879347d642daf2.stex" 
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0

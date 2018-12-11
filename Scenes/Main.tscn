@@ -1,20 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Utils.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Worker.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Tree.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Townhall.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Townhall.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/Player.gd" type="Script" id=6]
-[ext_resource path="res://Sprites/player.png" type="Texture" id=7]
-[ext_resource path="res://Scripts/Label.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/Label.gd" type="Script" id=7]
 
-[sub_resource type="CircleShape2D" id=1]
-
-custom_solver_bias = 0.0
-radius = 10.0
-
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 [node name="Utils" type="Node" parent="." index="0"]
 
@@ -33,25 +27,7 @@ position = Vector2( 213.547, 84.6649 )
 position = Vector2( 84.8069, 180.072 )
 script = ExtResource( 5 )
 
-[node name="Player" type="KinematicBody2D" parent="." index="4"]
-
-editor/display_folded = true
-position = Vector2( 239.195, 201.212 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
-script = ExtResource( 6 )
-
-[node name="Sprite" type="Sprite" parent="Player" index="0"]
-
-texture = ExtResource( 7 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" index="1"]
-
-scale = Vector2( 1.6, 1.6 )
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
+[node name="Player" parent="." index="4" instance=ExtResource( 6 )]
 
 [node name="Title" type="Label" parent="." index="5"]
 
@@ -113,6 +89,6 @@ text = "Wood: 0"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script = ExtResource( 8 )
+script = ExtResource( 7 )
 
 

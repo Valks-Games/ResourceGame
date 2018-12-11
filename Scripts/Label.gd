@@ -4,7 +4,10 @@ onready var townhall = get_node("../../Townhall")
 onready var message = Array()
 onready var final_message = ""
 
-func _process(delta):
+func _ready():
+	refresh()
+
+func refresh():
 	message.push_front("Max Workers: " + str(townhall.max_workers))
 	message.push_front("Wood: " + str(townhall.wood))
 	

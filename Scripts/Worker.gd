@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Area2D
 
 const Utils = preload("res://Scripts/Utils.gd")
 
@@ -31,7 +31,8 @@ func _ready():
 func harvest_resources(delta):
 	# Harvest resources for 'harvestTime' seconds.
 	harvestResourceTimer += 1 * delta
-	workerSprite.texture = miningTex
+	if workerSprite.texture != miningTex:
+		workerSprite.texture = miningTex
 	if harvestResourceTimer >= harvestTime:
 		harvestResourceTimer = 0
 		# We are finished gathering all the resources we can carry.
@@ -40,7 +41,8 @@ func harvest_resources(delta):
 func drop_off_resources(delta):
 	# Dump resources into base.
 	dumpResourceTimer += 1 * delta
-	workerSprite.texture = baseTex
+	if workerSprite.texture != baseTex:
+		workerSprite.texture = baseTex
 	if dumpResourceTimer >= dumpResourceTimeLength:
 		# Resume previous task.
 		dumpResourceTimer = 0
@@ -69,4 +71,4 @@ func ai(delta):
 
 func _physics_process(delta):
 	ai(delta)
-	move_and_slide(velocity)
+	position += velocity * delta

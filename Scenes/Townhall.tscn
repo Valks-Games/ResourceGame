@@ -7,13 +7,16 @@
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="Townhall" type="KinematicBody2D" index="0"]
+[node name="Townhall" type="Area2D"]
 
 position = Vector2( 57.7964, 163.389 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 
 [node name="TownhallSprite" type="Sprite" parent="." index="0"]
 
