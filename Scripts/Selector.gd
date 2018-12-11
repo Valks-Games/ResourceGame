@@ -26,5 +26,5 @@ func _process(delta):
 	if rect.drawing and circle.drawing:
 		var workers = get_tree().get_nodes_in_group("Workers")
 		for worker in workers:
-			if rect.rect.has_point(worker.position):
+			if rect.some_rect.has_point(worker.position):
 				circle.workers.push_front(worker)
