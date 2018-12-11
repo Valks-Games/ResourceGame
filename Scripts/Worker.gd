@@ -25,6 +25,12 @@ onready var dumpResourceTimeLength = 0.5
 onready var worker = load("res://Scenes/Worker.tscn")
 onready var workerSprite = get_node("WorkerSprite")
 
+#woodcutter
+#farmer
+#scholar
+#hunter
+#miner
+
 func _ready():
 	add_to_group("Workers")
 	

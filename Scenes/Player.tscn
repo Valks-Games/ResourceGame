@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="Player" type="Area2D" index="0"]
+[node name="Player" type="Area2D"]
 
 position = Vector2( 239.195, 201.212 )
 input_pickable = true
@@ -54,5 +54,6 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
+_sections_unfolded = [ "Editor" ]
 
 

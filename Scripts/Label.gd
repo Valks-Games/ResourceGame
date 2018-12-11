@@ -1,6 +1,6 @@
 extends Label
 
-onready var townhall = get_node("../../Townhall")
+onready var townhall = get_node("../../../Townhall")
 onready var message = Array()
 onready var final_message = ""
 
