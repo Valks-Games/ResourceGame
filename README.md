@@ -1,4 +1,4 @@
-Game design / path is not entirely planned out yet. (come become anything really)
+Game design / path is not entirely planned out yet. (could become anything really)
 
 Added [game wiki page](https://github.com/valkyrienyanko/ResourceGame/wiki).
 
