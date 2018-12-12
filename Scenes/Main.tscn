@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/WorldGenerator.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Resources.gd" type="Script" id=2]
@@ -6,13 +6,10 @@
 [ext_resource path="res://Scripts/Selector.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Rectangle.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Circle.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Townhall.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scripts/Label.gd" type="Script" id=9]
-[ext_resource path="res://Scripts/Button.gd" type="Script" id=10]
-[ext_resource path="res://Sprites/build_zone.png" type="Texture" id=11]
-[ext_resource path="res://Scripts/Button2.gd" type="Script" id=12]
-[ext_resource path="res://Scenes/Worker.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scripts/Label.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/Button.gd" type="Script" id=8]
+[ext_resource path="res://Sprites/build_zone.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/Button2.gd" type="Script" id=10]
 
 [node name="Main" type="Node"]
 
@@ -20,7 +17,9 @@
 
 script = ExtResource( 1 )
 
-[node name="Resources" type="Node" parent="World" index="0"]
+[node name="Resources" type="Node" parent="World" index="0" groups=[
+"Resources",
+]]
 
 script = ExtResource( 2 )
 
@@ -41,13 +40,7 @@ script = ExtResource( 5 )
 
 script = ExtResource( 6 )
 
-[node name="Townhall" parent="." index="3" instance=ExtResource( 7 )]
-
-position = Vector2( 301.672, 254.507 )
-
-[node name="Player" parent="." index="4" instance=ExtResource( 8 )]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="5"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="3"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -92,7 +85,7 @@ text = "Wood: 0"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script = ExtResource( 9 )
+script = ExtResource( 7 )
 
 [node name="Button" type="Button" parent="CanvasLayer/Panel" index="1"]
 
@@ -118,7 +111,7 @@ group = null
 text = "Create Worker"
 flat = false
 align = 1
-script = ExtResource( 10 )
+script = ExtResource( 8 )
 
 [node name="Button2" type="Button" parent="CanvasLayer/Panel" index="2"]
 
@@ -142,14 +135,10 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Create Build Zone"
-icon = ExtResource( 11 )
+icon = ExtResource( 9 )
 flat = false
 align = 1
-script = ExtResource( 12 )
-
-[node name="Worker" parent="." index="6" instance=ExtResource( 13 )]
-
-position = Vector2( 460, 280 )
+script = ExtResource( 10 )
 
 [connection signal="pressed" from="CanvasLayer/Panel/Button" to="CanvasLayer/Panel/Button" method="_on_Button_pressed"]
 

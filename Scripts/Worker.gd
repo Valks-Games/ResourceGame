@@ -2,32 +2,25 @@ extends KinematicBody2D
 
 const Utils = preload("res://Scripts/Utils.gd")
 
-onready var miningTex = preload("res://Sprites/worker_mining.png")
-onready var baseTex = preload("res://Sprites/worker_return_to_base.png")
+onready var mining_sprite = preload("res://Sprites/worker_mining.png")
+onready var base_sprite = preload("res://Sprites/worker_return_to_base.png")
+onready var tree_sprite = preload("res://Sprites/tree.png")
+onready var townhall_sprite = preload("res://Sprites/townhall.png")
+onready var worker_sprite = preload("res://Sprites/worker_mining.png")
+onready var buildzone_sprite = preload("res://Sprites/build_zone.png")
+onready var resources = get_tree().get_nodes_in_group("Resources")[0]
 
-onready var velocity = Vector2();
-
-onready var tree_resource = preload("res://Sprites/tree.png")
-onready var townhall_resource = preload("res://Sprites/townhall.png")
-onready var worker_resource = preload("res://Sprites/worker_mining.png")
-onready var buildzone_resource = preload("res://Sprites/build_zone.png")
-
-onready var speed = 30
-onready var findResources = true
-
-onready var harvestResourceTimer = 0
-onready var harvestTime = 0.5
-
-onready var dumpResourceTimer = 0
-onready var dumpResourceTimeLength = 0.5
-
-onready var nearest_target = null
-onready var nearest_townhall = null
-onready var command = "find_nearest_tree"
-
-onready var wood = 0
-
-onready var resources = get_parent().get_node("World/Resources")
+var velocity = Vector2();
+var speed = 30
+var find_resources = true
+var harvest_resource_timer = 0
+var harvest_time = 0.5
+var dump_resource_timer = 0
+var dump_resource_time_length = 0.5
+var nearest_target = null
+var nearest_townhall = null
+var command = "find_nearest_tree"
+var wood = 0
 
 #woodcutter
 #farmer
@@ -66,41 +59,44 @@ func ai(delta, cmd):
 					wood += 1
 				command = "move_towards_nearest_buildzone"
 		"move_towards_nearest_buildzone":
-			if position.distance_to(nearest_target.position) < buildzone_resource.get_width() + 1:
+			if position.distance_to(nearest_target.position) < buildzone_sprite.get_width() + 1:
 				wood -= 1
+				nearest_target.wood += 1
+				if nearest_target.wood >= 2:
+					nearest_target.evolve()
 				command = "find_nearest_townhall"
 			else:
 				move(delta)
 		"move_towards_nearest_tree":
-			if position.distance_to(nearest_target.position) < tree_resource.get_width() + 1:
+			if position.distance_to(nearest_target.position) < tree_sprite.get_width() + 1:
 				command = "harvest_wood"
 			else:
 				move(delta)
 		"move_towards_nearest_townhall":
-			if position.distance_to(nearest_target.position) < townhall_resource.get_width() + 1:
+			if position.distance_to(nearest_target.position) < townhall_sprite.get_width() + 1:
 				command = "drop_off_resources"
 			else:
 				move(delta)
 		"harvest_wood":
 			# Harvest resources for 'harvestTime' seconds.
-			harvestResourceTimer += 1 * delta
-			if worker_resource != miningTex:
-				worker_resource = miningTex
-			if harvestResourceTimer >= harvestTime:
+			harvest_resource_timer += delta
+			if get_node("WorkerSprite").texture != mining_sprite:
+				get_node("WorkerSprite").texture = mining_sprite
+			if harvest_resource_timer >= harvest_time:
 				# We are finished gathering all the resources we can carry.
-				harvestResourceTimer = 0
+				harvest_resource_timer = 0
 				wood += 1
-				findResources = false
+				find_resources = false
 				command = "find_nearest_townhall"
 		"drop_off_resources":
 			# Dump resources into base.
-			dumpResourceTimer += 1 * delta
-			if worker_resource != baseTex:
-				worker_resource = baseTex
-			if dumpResourceTimer >= dumpResourceTimeLength:
+			dump_resource_timer += delta
+			if get_node("WorkerSprite").texture != base_sprite:
+				get_node("WorkerSprite").texture = base_sprite
+			if dump_resource_timer >= dump_resource_time_length:
 				# Resume previous task.
-				dumpResourceTimer = 0
-				findResources = true
+				dump_resource_timer = 0
+				find_resources = true
 				if wood > 0 && resources.wood <= resources.max_wood:
 					resources.add_wood(wood)
 					wood -= 1

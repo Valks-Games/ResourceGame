@@ -1,10 +1,12 @@
 extends Label
 
-onready var resources = get_parent().get_parent().get_parent().get_node("World/Resources")
-onready var message = Array()
-onready var final_message = ""
+onready var resources = get_tree().get_nodes_in_group("Resources")[0]
+
+var message = Array()
+var final_message = ""
 
 func _ready():
+	add_to_group("Labels")
 	refresh()
 
 func refresh():

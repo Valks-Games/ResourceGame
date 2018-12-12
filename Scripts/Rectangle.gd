@@ -1,11 +1,11 @@
 extends Node2D
 
-onready var x1
-onready var y1
-onready var x2
-onready var y2
-onready var drawing = false
-onready var some_rect
+var x1
+var x2
+var y1
+var y2
+var drawing = false
+var some_rect
 
 func refresh():
 	update()

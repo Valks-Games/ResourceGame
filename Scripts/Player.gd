@@ -1,10 +1,13 @@
 extends KinematicBody2D
 
-onready var speed = 100
-onready var velocity = Vector2()
-onready var townhall = get_parent().get_node("Townhall")
 onready var camera = get_node("Camera2D")
-onready var zoom = 1
+
+var speed = 100
+var velocity = Vector2()
+var zoom = 1
+
+func _ready():
+	add_to_group("Player")
 
 func _input(event):
 	if event is InputEventMouseButton:

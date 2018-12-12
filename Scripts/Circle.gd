@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var drawing = false
-onready var workers = Array()
+var drawing = false
+var workers = Array()
 
 func refresh():
 	update()
