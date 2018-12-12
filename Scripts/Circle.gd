@@ -10,4 +10,5 @@ func _draw():
 	for worker in workers:
 		var width = worker.get_node("WorkerSprite").texture.get_width()
 		draw_circle(worker.position, width / 2 + width / 8, Color(0, 1, 0, 0.5))
-	workers = Array()
+	if !drawing: 
+		workers = Array()

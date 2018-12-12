@@ -13,8 +13,21 @@ func _input(event):
 				rect.x2 = rect.x1
 				rect.y2 = rect.y1
 				rect.drawing = true
-				circle.drawing = true
+				circle.drawing = false
 			else: #released
+				circle.drawing = true
+				if rect.drawing:
+					var workers = get_tree().get_nodes_in_group("Workers")
+					for worker in workers:
+						var wpos = worker.position;
+						if rect.x1 > rect.x2:
+							if wpos.x >= rect.x2 && wpos.y >= rect.y2 && wpos.x <= rect.x1 && wpos.y <= rect.y1:
+								if !circle.workers.has(worker):
+									circle.workers.push_front(worker)
+						else:
+							if wpos.x >= rect.x1 && wpos.y >= rect.y1 && wpos.x <= rect.x2 && wpos.y <= rect.y2:
+								if !circle.workers.has(worker):
+									circle.workers.push_front(worker)
 				rect.drawing = false
 	elif event is InputEventMouseMotion:
 		rect.x2 = get_global_mouse_position().x
@@ -23,8 +36,3 @@ func _input(event):
 
 func _process(delta):
 	circle.refresh()
-	if rect.drawing and circle.drawing:
-		var workers = get_tree().get_nodes_in_group("Workers")
-		for worker in workers:
-			if rect.some_rect.has_point(worker.position):
-				circle.workers.push_front(worker)

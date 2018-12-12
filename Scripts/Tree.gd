@@ -1,6 +1,6 @@
-extends Area2D
+extends KinematicBody2D
 
 onready var tree_info = "I'm a tree!";
 
 func _ready():
-	add_to_group("Obstacles")
+	add_to_group("Trees")

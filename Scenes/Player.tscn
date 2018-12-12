@@ -8,16 +8,13 @@
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="KinematicBody2D"]
 
-position = Vector2( 239.195, 201.212 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
+position = Vector2( 641.709, 361.55 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
@@ -51,7 +48,7 @@ drag_margin_left = 0.2
 drag_margin_top = 0.2
 drag_margin_right = 0.2
 drag_margin_bottom = 0.2
-editor_draw_screen = true
+editor_draw_screen = false
 editor_draw_limits = false
 editor_draw_drag_margin = false
 _sections_unfolded = [ "Editor" ]

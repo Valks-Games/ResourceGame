@@ -1,4 +1,4 @@
-extends Area2D
+extends KinematicBody2D
 
 onready var speed = 100
 onready var velocity = Vector2()
@@ -9,7 +9,7 @@ onready var zoom = 1
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			townhall.addWood(1)
+			pass
 		if event.button_index == BUTTON_WHEEL_DOWN:
 			zoom += 0.1
 		if event.button_index == BUTTON_WHEEL_UP:

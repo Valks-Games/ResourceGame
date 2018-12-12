@@ -1,6 +1,6 @@
 extends Label
 
-onready var townhall = get_node("../../../Townhall")
+onready var resources = get_parent().get_parent().get_parent().get_node("World/Resources")
 onready var message = Array()
 onready var final_message = ""
 
@@ -8,8 +8,14 @@ func _ready():
 	refresh()
 
 func refresh():
-	message.push_front("Max Workers: " + str(townhall.max_workers))
-	message.push_front("Wood: " + str(townhall.wood))
+	var worker_count = get_tree().get_nodes_in_group("Workers").size()
+	if worker_count == 0:
+		resources.workers = 1
+	else:
+		resources.workers = worker_count
+	
+	message.push_front("Workers: " + str(resources.workers) + " / " + str(resources.max_workers))
+	message.push_front("Wood: " + str(resources.wood) + " / " + str(resources.max_wood))
 	
 	for i in range(message.size()):
 		final_message += message[i] + "\n"
