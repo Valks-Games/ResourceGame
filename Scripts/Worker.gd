@@ -57,7 +57,8 @@ func ai(delta, cmd):
 				if wood < 1:
 					resources.add_wood(-1)
 					wood += 1
-				command = "move_towards_nearest_buildzone"
+				if nearest_target.placed:
+					command = "move_towards_nearest_buildzone"
 		"move_towards_nearest_buildzone":
 			if position.distance_to(nearest_target.position) < buildzone_sprite.get_width() + 1:
 				wood -= 1

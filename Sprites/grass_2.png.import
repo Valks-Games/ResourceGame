@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wood_generator.png-3c0d5d86c7f7fae0fd847ca0b33c6563.stex"
+path="res://.import/grass_2.png-24f4a0086cbd60b4a332c81d544e38ba.stex"
 
 [deps]
 
-source_file="res://Sprites/wood_generator.png"
-dest_files=[ "res://.import/wood_generator.png-3c0d5d86c7f7fae0fd847ca0b33c6563.stex" ]
+source_file="res://Sprites/grass_2.png"
+dest_files=[ "res://.import/grass_2.png-24f4a0086cbd60b4a332c81d544e38ba.stex" ]
 
 [params]
 
@@ -16,7 +16,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

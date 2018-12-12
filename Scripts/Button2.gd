@@ -10,11 +10,11 @@ func _ready():
 func _on_Button2_pressed():
 	var build_zone = build_zone_sprite.instance()
 	build_zone.set_position(world_generator.player.position)
-	get_parent().get_parent().get_parent().add_child(build_zone)
+	world_generator.add_child(build_zone)
 	get_tree().call_group("Labels", "refresh")
 
 func _process(delta):
-	if resources.wood >= 10:
+	if resources.wood >= 0:
 		disabled = false
 	else:
 		disabled = true

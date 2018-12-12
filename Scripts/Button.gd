@@ -8,7 +8,7 @@ func _on_Button_pressed():
 	if (resources.workers < resources.max_workers):
 		var instance = worker.instance()
 		instance.set_position(Vector2((world_generator.world_width / 2) * world_generator.cell_size, (world_generator.world_height / 2 - 1) * world_generator.cell_size))
-		get_parent().get_parent().get_parent().add_child(instance)
+		world_generator.add_child(instance)
 		get_tree().call_group("Labels", "refresh")
 
 func _process(delta):

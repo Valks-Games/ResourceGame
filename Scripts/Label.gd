@@ -16,8 +16,10 @@ func refresh():
 	else:
 		resources.workers = worker_count
 	
-	message.push_front("Workers: " + str(resources.workers) + " / " + str(resources.max_workers))
-	message.push_front("Wood: " + str(resources.wood) + " / " + str(resources.max_wood))
+	message.push_back("Wood: " + str(resources.wood) + " / " + str(resources.max_wood))
+	message.push_back("Stone: " + str(resources.stone) + " / " + str(resources.max_stone))
+	message.push_back("Iron: " + str(resources.iron) + " / " + str(resources.max_iron))
+	message.push_back("Workers: " + str(resources.workers) + " / " + str(resources.max_workers))
 	
 	for i in range(message.size()):
 		final_message += message[i] + "\n"
