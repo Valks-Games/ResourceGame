@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="Tree" type="KinematicBody2D"]
+[node name="Tree" type="KinematicBody2D" index="0"]
 
 position = Vector2( 0.201347, 0.615227 )
 input_pickable = false

@@ -1,7 +1,7 @@
 extends Node
 
 var wood = 0
-var max_wood = 15
+var max_wood = 5
 
 var stone = 0
 var max_stone = 15

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/WorldGenerator.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Resources.gd" type="Script" id=2]
@@ -6,14 +6,17 @@
 [ext_resource path="res://Scripts/Selector.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Rectangle.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Circle.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/Button.gd" type="Script" id=7]
-[ext_resource path="res://Sprites/build_zone.png" type="Texture" id=8]
-[ext_resource path="res://Scripts/Button2.gd" type="Script" id=9]
-[ext_resource path="res://Scripts/Label.gd" type="Script" id=10]
-[ext_resource path="res://tileset.tres" type="TileSet" id=11]
-[ext_resource path="res://Scripts/TileMap.gd" type="Script" id=12]
+[ext_resource path="res://Sprites/worker_mining.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/ButtonCreateWorker.gd" type="Script" id=8]
+[ext_resource path="res://Sprites/house.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/ButtonCreateHouse.gd" type="Script" id=10]
+[ext_resource path="res://Sprites/wood_generator.png" type="Texture" id=11]
+[ext_resource path="res://Scripts/ButtonCreateWoodGenerator.gd" type="Script" id=12]
+[ext_resource path="res://Scripts/Label.gd" type="Script" id=13]
+[ext_resource path="res://tileset.tres" type="TileSet" id=14]
+[ext_resource path="res://Scripts/TileMap.gd" type="Script" id=15]
 
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 [node name="World" type="Node" parent="." index="0"]
 
@@ -77,8 +80,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 9.0
-margin_right = 276.0
+margin_right = 473.0
 margin_bottom = 56.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -94,7 +96,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 267.0
+margin_right = 473.0
 margin_bottom = 38.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -104,13 +106,13 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="Button" type="Button" parent="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer" index="0"]
+[node name="ButtonCreateWorker" type="Button" parent="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 103.0
+margin_right = 137.0
 margin_bottom = 38.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -124,18 +126,19 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Create Worker"
+icon = ExtResource( 7 )
 flat = false
 align = 1
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
-[node name="Button2" type="Button" parent="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer" index="1"]
+[node name="ButtonCreateHouse" type="Button" parent="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 107.0
-margin_right = 267.0
+margin_left = 141.0
+margin_right = 273.0
 margin_bottom = 38.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -148,11 +151,37 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Create Build Zone"
-icon = ExtResource( 8 )
+text = "Create House"
+icon = ExtResource( 9 )
 flat = false
 align = 1
-script = ExtResource( 9 )
+script = ExtResource( 10 )
+
+[node name="ButtonCreateWoodGenerator" type="Button" parent="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 277.0
+margin_right = 473.0
+margin_bottom = 38.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Create Wood Generator"
+icon = ExtResource( 11 )
+flat = false
+align = 1
+script = ExtResource( 12 )
 
 [node name="Label" type="Label" parent="CanvasLayer/GUI/Center/VBoxContainer" index="1"]
 
@@ -161,7 +190,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 42.0
-margin_right = 267.0
+margin_right = 473.0
 margin_bottom = 56.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -173,7 +202,7 @@ text = "Wood: 0"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script = ExtResource( 10 )
+script = ExtResource( 13 )
 
 [node name="TileMap" type="TileMap" parent="." index="4" groups=[
 "TileMap",
@@ -181,7 +210,7 @@ script = ExtResource( 10 )
 
 z_index = -100
 mode = 0
-tile_set = ExtResource( 11 )
+tile_set = ExtResource( 14 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -197,11 +226,13 @@ collision_mask = 1
 occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray(  )
-script = ExtResource( 12 )
+script = ExtResource( 15 )
 _sections_unfolded = [ "Cell", "Z Index" ]
 
-[connection signal="pressed" from="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/Button" to="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/Button" method="_on_Button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/ButtonCreateWorker" to="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/ButtonCreateWorker" method="_on_Button_pressed"]
 
-[connection signal="pressed" from="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/Button2" to="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/Button2" method="_on_Button2_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/ButtonCreateHouse" to="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/ButtonCreateHouse" method="_on_Button2_pressed"]
+
+[connection signal="pressed" from="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/ButtonCreateWoodGenerator" to="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/ButtonCreateWoodGenerator" method="_on_ButtonCreateWoodGenerator_pressed"]
 
 

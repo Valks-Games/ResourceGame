@@ -27,7 +27,6 @@ texture = ExtResource( 2 )
 position = Vector2( -0.323102, -0.09989 )
 scale = Vector2( 1.68754, 1.72233 )
 shape = SubResource( 1 )
-disabled = true
 
 [node name="Label" type="Label" parent="." index="2"]
 
