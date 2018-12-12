@@ -2,4 +2,4 @@ Game design / path is not entirely planned out yet. (could become anything reall
 
 Added [game wiki page](https://github.com/valkyrienyanko/ResourceGame/wiki).
 
-![preview](https://i.imgur.com/xajW6Ms.png)
+![preview](https://i.imgur.com/R9DvI70.png)
