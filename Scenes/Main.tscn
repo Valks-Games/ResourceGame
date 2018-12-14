@@ -1,26 +1,26 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/WorldGenerator.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Resources.gd" type="Script" id=2]
-[ext_resource path="res://Scripts/Utils.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/Selector.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/Rectangle.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/Circle.gd" type="Script" id=6]
-[ext_resource path="res://Sprites/worker_mining.png" type="Texture" id=7]
-[ext_resource path="res://Scripts/ButtonCreateWorker.gd" type="Script" id=8]
-[ext_resource path="res://Sprites/house.png" type="Texture" id=9]
-[ext_resource path="res://Scripts/ButtonCreateHouse.gd" type="Script" id=10]
-[ext_resource path="res://Sprites/wood_generator.png" type="Texture" id=11]
-[ext_resource path="res://Scripts/ButtonCreateWoodGenerator.gd" type="Script" id=12]
-[ext_resource path="res://Scripts/Label.gd" type="Script" id=13]
-[ext_resource path="res://tileset.tres" type="TileSet" id=14]
-[ext_resource path="res://Scripts/TileMap.gd" type="Script" id=15]
+[ext_resource path="res://Scripts/Units.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Utils.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Selector.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Rectangle.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Circle.gd" type="Script" id=7]
+[ext_resource path="res://Sprites/worker_mining.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/ButtonCreateWorker.gd" type="Script" id=9]
+[ext_resource path="res://Sprites/house.png" type="Texture" id=10]
+[ext_resource path="res://Scripts/ButtonCreateHouse.gd" type="Script" id=11]
+[ext_resource path="res://Sprites/wood_generator.png" type="Texture" id=12]
+[ext_resource path="res://Scripts/ButtonCreateWoodGenerator.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/Label.gd" type="Script" id=14]
+[ext_resource path="res://TileSets/tileset.tres" type="TileSet" id=15]
+[ext_resource path="res://Scripts/TileMap.gd" type="Script" id=16]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 [node name="World" type="Node" parent="." index="0"]
 
-editor/display_folded = true
 script = ExtResource( 1 )
 
 [node name="Resources" type="Node" parent="World" index="0" groups=[
@@ -29,25 +29,30 @@ script = ExtResource( 1 )
 
 script = ExtResource( 2 )
 
-[node name="Utils" type="Node" parent="." index="1"]
+[node name="Units" type="Node" parent="World" index="1"]
 
 script = ExtResource( 3 )
+
+[node name="Utils" type="Node" parent="." index="1"]
+
+script = ExtResource( 4 )
 
 [node name="Selector" type="Node2D" parent="." index="2"]
 
 editor/display_folded = true
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
 [node name="Rectangle" type="Node2D" parent="Selector" index="0"]
 
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="Circle" type="Node2D" parent="Selector" index="1"]
 
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="3"]
 
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -126,10 +131,10 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Create Worker"
-icon = ExtResource( 7 )
+icon = ExtResource( 8 )
 flat = false
 align = 1
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="ButtonCreateHouse" type="Button" parent="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer" index="1"]
 
@@ -152,10 +157,10 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Create House"
-icon = ExtResource( 9 )
+icon = ExtResource( 10 )
 flat = false
 align = 1
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="ButtonCreateWoodGenerator" type="Button" parent="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer" index="2"]
 
@@ -178,10 +183,10 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Create Wood Generator"
-icon = ExtResource( 11 )
+icon = ExtResource( 12 )
 flat = false
 align = 1
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 
 [node name="Label" type="Label" parent="CanvasLayer/GUI/Center/VBoxContainer" index="1"]
 
@@ -202,7 +207,7 @@ text = "Wood: 0"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script = ExtResource( 13 )
+script = ExtResource( 14 )
 
 [node name="TileMap" type="TileMap" parent="." index="4" groups=[
 "TileMap",
@@ -210,7 +215,7 @@ script = ExtResource( 13 )
 
 z_index = -100
 mode = 0
-tile_set = ExtResource( 14 )
+tile_set = ExtResource( 15 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -226,7 +231,7 @@ collision_mask = 1
 occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray(  )
-script = ExtResource( 15 )
+script = ExtResource( 16 )
 _sections_unfolded = [ "Cell", "Z Index" ]
 
 [connection signal="pressed" from="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/ButtonCreateWorker" to="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/ButtonCreateWorker" method="_on_Button_pressed"]

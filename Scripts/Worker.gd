@@ -32,72 +32,9 @@ func _ready():
 	add_to_group("Workers")
 	
 func move(delta):
-	velocity = Vector2()
-	
 	var workers = get_tree().get_nodes_in_group("Workers")
-	var close_workers = Array()
-	for i in range(workers.size()):
-		if position.distance_to(workers[i].position) < worker_sprite.get_width():
-			close_workers.append(workers[i])
-			
-	var alignment = compute_alignment(close_workers)
-	var cohesion = compute_cohesion(close_workers)
-	var separation = compute_separation(close_workers)
-	
-	var allignment_weight = 30
-	var cohesion_weight = 1
-	var separation_weight = 3
-	
-	velocity += Utils.calc_target_velocity(position, nearest_target.position, speed)
-	velocity.x += alignment.x * allignment_weight + cohesion.x * cohesion_weight + separation.x * separation_weight
-	velocity.y += alignment.y * allignment_weight + cohesion.y * cohesion_weight + separation.y * separation_weight
-	 
-	velocity = velocity.normalized()
-	
-	position += velocity * delta * speed
-	
-func compute_alignment(close_workers):
-	var vector = Vector2()
-	for i in range(close_workers.size()):
-		vector.x += close_workers[i].velocity.x
-		vector.y += close_workers[i].velocity.y
-	if close_workers.size() == 0:
-		return vector
-	else:
-		vector.x /= close_workers.size()
-		vector.y /= close_workers.size()
-		vector.normalized()
-		return vector
-	
-func compute_cohesion(close_workers):
-	var vector = Vector2()
-	for i in range(close_workers.size()):
-		vector.x += close_workers[i].position.x
-		vector.y += close_workers[i].position.y
-	if close_workers.size() == 0:
-		return vector
-	else:
-		vector.x /= close_workers.size()
-		vector.y /= close_workers.size()
-		vector = Vector2(vector.x - position.x, vector.y - position.y)
-		vector.normalized()
-		return vector
-	
-func compute_separation(close_workers):
-	var vector = Vector2()
-	for i in range(close_workers.size()):
-		vector.x += close_workers[i].position.x - position.x
-		vector.y += close_workers[i].position.y - position.y
-	if close_workers.size() == 0:
-		return vector
-	else:
-		vector.x /= close_workers.size()
-		vector.y /= close_workers.size()
-		vector.x *= -1
-		vector.y *= -1
-		vector.normalized()
-		return vector
-	
+	position += Utils.flocking_behaviour(workers, position, worker_sprite, nearest_target, speed) * delta * speed
+
 func ai(delta, cmd):
 	match(cmd):
 		"idle":

@@ -38,7 +38,6 @@ func _ready():
 				if x >= world_width / 2 + spawn_room || x <= world_width / 2 - spawn_room || y >= world_height / 2 + spawn_room || y <= world_height / 2 - spawn_room:
 					matrix[x][y] = tree_resource.instance()
 	matrix[world_width / 2][world_height / 2] = townhall_resource.instance()
-	matrix[world_width / 2 + 2][world_height / 2] = worker_resource.instance()
 	matrix[world_width / 2 + 1][world_height / 2] = player
 			
 	for x in range(world_width):
@@ -46,3 +45,6 @@ func _ready():
 			if matrix[x][y] != null:
 				matrix[x][y].set_position(Vector2(x * cell_size, y * cell_size))
 				get_parent().call_deferred("add_child", matrix[x][y])
+	
+	# Player moves so you should be able to build there after!
+	matrix[world_width / 2 + 1][world_height / 2] = null
