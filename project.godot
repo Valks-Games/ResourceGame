@@ -13,7 +13,6 @@ config_version=3
 config/name="Resource Game"
 run/main_scene="res://Scenes/Main.tscn"
 boot_splash/image="res://splash.png"
-config/icon="res://icon.png"
 
 [display]
 
@@ -21,6 +20,12 @@ window/size/width=1280
 window/size/height=720
 window/stretch/mode="viewport"
 window/stretch/shrink="1"
+
+[global]
+
+message=false
+queue=false
+size=false
 
 [input]
 

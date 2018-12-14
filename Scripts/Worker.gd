@@ -9,6 +9,7 @@ onready var townhall_sprite = preload("res://Sprites/townhall.png")
 onready var worker_sprite = preload("res://Sprites/worker_mining.png")
 onready var buildzone_sprite = preload("res://Sprites/build_zone.png")
 onready var resources = get_tree().get_nodes_in_group("Resources")[0]
+onready var units = get_tree().get_nodes_in_group("Units")[0]
 
 var velocity = Vector2();
 var speed = 30

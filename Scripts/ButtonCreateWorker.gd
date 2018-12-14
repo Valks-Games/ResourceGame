@@ -8,7 +8,11 @@ onready var worker = load("res://Scenes/Worker.tscn")
 func _on_Button_pressed():
 	if (resources.workers < resources.max_workers):
 		var instance = worker.instance()
-		instance.set_position(Vector2((world_generator.world_width / 2) * world_generator.cell_size, (world_generator.world_height / 2 - 1) * world_generator.cell_size))
+		var cell_size = world_generator.cell_size
+		var w = world_generator.world_width
+		var h = world_generator.world_height
+		var offset = cell_size / 2
+		instance.set_position(Vector2((w / 2) * cell_size + offset, (h / 2 - 1) * cell_size + offset))
 		units.add_child(instance)
 		get_tree().call_group("Labels", "refresh")
 
