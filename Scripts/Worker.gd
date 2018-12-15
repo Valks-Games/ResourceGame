@@ -34,7 +34,7 @@ func _ready():
 	
 func move(delta):
 	var workers = get_tree().get_nodes_in_group("Workers")
-	position += Utils.flocking_behaviour(workers, position, worker_sprite, nearest_target, speed) * delta * speed
+	position += Utils.flocking_behaviour(workers, position, worker_sprite.get_width(), nearest_target, speed) * delta * speed
 
 func ai(delta, cmd):
 	match(cmd):

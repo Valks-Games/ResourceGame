@@ -4,7 +4,7 @@ onready var buildzone_sprite = preload("res://Sprites/build_zone.png")
 onready var wood_generator_sprite = preload("res://Sprites/wood_generator.png")
 onready var house_sprite = preload("res://Sprites/house.png")
 onready var resources = get_tree().get_nodes_in_group("Resources")[0]
-onready var world_generator = get_tree().get_nodes_in_group("WorldGenerator")[0]
+onready var world = get_tree().get_nodes_in_group("WorldGenerator")[0]
 
 var placed = false
 var constructed = false
@@ -30,21 +30,20 @@ func evolve():
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			var x = round(get_global_mouse_position().x / world_generator.cell_size)
-			var y = round(get_global_mouse_position().y / world_generator.cell_size)
-			if world_generator.matrix[x][y] == null:
+			var pos = world.convert_to_world_coords(get_global_mouse_position())
+
+			if world.matrix[pos.x][pos.y] == null:
 				placed = true
-				world_generator.matrix[x][y] = self
+				world.matrix[pos.x][pos.y] = self
 		if event.button_index == BUTTON_RIGHT and event.pressed:
 			if !placed:
 				queue_free()
 	
 func _process(delta):
 	if !placed:
-		var x = round(get_global_mouse_position().x / world_generator.cell_size)
-		var y = round(get_global_mouse_position().y / world_generator.cell_size)
-		if world_generator.matrix[x][y] == null:
-			position = Vector2(x * world_generator.cell_size, y * world_generator.cell_size)
+		var pos = world.convert_to_world_coords(get_global_mouse_position())
+		if world.world_cell_free(pos):
+			position = world.get_world_coords(pos)
 			modulate = Color(modulate.r, modulate.g, modulate.b, 0.3)
 	else:
 		modulate = Color(modulate.r, modulate.g, modulate.b, 1)

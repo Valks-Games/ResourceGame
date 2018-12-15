@@ -18,12 +18,12 @@ static func calc_target_velocity(mover, target, speed):
 	return (target - mover).normalized() * speed
 	
 # Accepts the workers as an array and the worker position being checked and the worker sprite.
-static func flocking_behaviour(workers, position, worker_sprite, nearest_target, speed):
+static func flocking_behaviour(workers, position, width, nearest_target, speed):
 	var velocity = Vector2()
 	
 	var close_workers = Array()
 	for i in range(workers.size()):
-		if position.distance_to(workers[i].position) < worker_sprite.get_width():
+		if position.distance_to(workers[i].position) < width:
 			close_workers.append(workers[i])
 			
 	var alignment = compute_alignment(close_workers)
