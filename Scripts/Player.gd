@@ -8,6 +8,7 @@ var zoom = 1
 
 func _ready():
 	add_to_group("Player")
+	scale = Vector2(0.5, 0.5)
 
 func _input(event):
 	if event is InputEventMouseButton:

@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
-onready var tree_info = "I'm a tree!";
+var tree_info = "I'm a tree!"
+var type = "tree"
 
 func _ready():
 	add_to_group("Trees")

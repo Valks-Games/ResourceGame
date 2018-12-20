@@ -3,27 +3,26 @@
 [ext_resource path="res://Scripts/WorldGenerator.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Resources.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Units.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/Utils.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/Selector.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/Rectangle.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/Circle.gd" type="Script" id=7]
-[ext_resource path="res://Sprites/worker_mining.png" type="Texture" id=8]
-[ext_resource path="res://Scripts/ButtonCreateWorker.gd" type="Script" id=9]
-[ext_resource path="res://Sprites/house.png" type="Texture" id=10]
-[ext_resource path="res://Scripts/ButtonCreateHouse.gd" type="Script" id=11]
-[ext_resource path="res://Sprites/wood_generator.png" type="Texture" id=12]
-[ext_resource path="res://Scripts/ButtonCreateWoodGenerator.gd" type="Script" id=13]
-[ext_resource path="res://Scripts/Label.gd" type="Script" id=14]
-[ext_resource path="res://TileSets/tileset.tres" type="TileSet" id=15]
-[ext_resource path="res://Scripts/TileMap.gd" type="Script" id=16]
-[ext_resource path="res://TileSets/RocksTileSetxx.tres" type="TileSet" id=17]
-[ext_resource path="res://Scripts/RockTiles.gd" type="Script" id=18]
+[ext_resource path="res://TileSets/tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://Scripts/TileMap.gd" type="Script" id=5]
+[ext_resource path="res://TileSets/RocksTileSetxx.tres" type="TileSet" id=6]
+[ext_resource path="res://Scripts/RockTiles.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/Utils.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/Selector.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/Rectangle.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/Circle.gd" type="Script" id=11]
+[ext_resource path="res://Sprites/worker_mining.png" type="Texture" id=12]
+[ext_resource path="res://Scripts/ButtonCreateWorker.gd" type="Script" id=13]
+[ext_resource path="res://Sprites/house.png" type="Texture" id=14]
+[ext_resource path="res://Scripts/ButtonCreateHouse.gd" type="Script" id=15]
+[ext_resource path="res://Sprites/wood_generator.png" type="Texture" id=16]
+[ext_resource path="res://Scripts/ButtonCreateWoodGenerator.gd" type="Script" id=17]
+[ext_resource path="res://Scripts/Label.gd" type="Script" id=18]
 
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 [node name="World" type="Node" parent="." index="0"]
 
-editor/display_folded = true
 script = ExtResource( 1 )
 
 [node name="Resources" type="Node" parent="World" index="0" groups=[
@@ -36,22 +35,80 @@ script = ExtResource( 2 )
 
 script = ExtResource( 3 )
 
+[node name="Tiles" type="Node" parent="World" index="2"]
+
+editor/display_folded = true
+
+[node name="TileMap" type="TileMap" parent="World/Tiles" index="0" groups=[
+"TileMap",
+]]
+
+z_index = -100
+mode = 0
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 32
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray(  )
+script = ExtResource( 5 )
+_sections_unfolded = [ "Cell", "Z Index" ]
+
+[node name="RockTiles" type="TileMap" parent="World/Tiles" index="1" groups=[
+"RockTiles",
+]]
+
+z_index = -99
+mode = 0
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray(  )
+script = ExtResource( 7 )
+_sections_unfolded = [ "Cell", "Z Index" ]
+
+[node name="Structures" type="Node" parent="World" index="3" groups=[
+"Structures",
+]]
+
 [node name="Utils" type="Node" parent="." index="1"]
 
-script = ExtResource( 4 )
+script = ExtResource( 8 )
 
 [node name="Selector" type="Node2D" parent="." index="2"]
 
 editor/display_folded = true
-script = ExtResource( 5 )
+script = ExtResource( 9 )
 
 [node name="Rectangle" type="Node2D" parent="Selector" index="0"]
 
-script = ExtResource( 6 )
+script = ExtResource( 10 )
 
 [node name="Circle" type="Node2D" parent="Selector" index="1"]
 
-script = ExtResource( 7 )
+script = ExtResource( 11 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="3"]
 
@@ -134,10 +191,10 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Create Worker"
-icon = ExtResource( 8 )
+icon = ExtResource( 12 )
 flat = false
 align = 1
-script = ExtResource( 9 )
+script = ExtResource( 13 )
 
 [node name="ButtonCreateHouse" type="Button" parent="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer" index="1"]
 
@@ -160,10 +217,10 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Create House"
-icon = ExtResource( 10 )
+icon = ExtResource( 14 )
 flat = false
 align = 1
-script = ExtResource( 11 )
+script = ExtResource( 15 )
 
 [node name="ButtonCreateWoodGenerator" type="Button" parent="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer" index="2"]
 
@@ -186,10 +243,10 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Create Wood Generator"
-icon = ExtResource( 12 )
+icon = ExtResource( 16 )
 flat = false
 align = 1
-script = ExtResource( 13 )
+script = ExtResource( 17 )
 
 [node name="Label" type="Label" parent="CanvasLayer/GUI/Center/VBoxContainer" index="1"]
 
@@ -210,57 +267,7 @@ text = "Wood: 0"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script = ExtResource( 14 )
-
-[node name="TileMap" type="TileMap" parent="." index="4" groups=[
-"TileMap",
-]]
-
-z_index = -100
-mode = 0
-tile_set = ExtResource( 15 )
-cell_size = Vector2( 32, 32 )
-cell_quadrant_size = 32
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-cell_half_offset = 2
-cell_tile_origin = 0
-cell_y_sort = false
-cell_clip_uv = false
-collision_use_kinematic = false
-collision_friction = 1.0
-collision_bounce = 0.0
-collision_layer = 1
-collision_mask = 1
-occluder_light_mask = 1
-format = 1
-tile_data = PoolIntArray(  )
-script = ExtResource( 16 )
-_sections_unfolded = [ "Cell", "Z Index" ]
-
-[node name="RockTiles" type="TileMap" parent="." index="5" groups=[
-"RockTiles",
-]]
-
-z_index = -99
-mode = 0
-tile_set = ExtResource( 17 )
-cell_size = Vector2( 32, 32 )
-cell_quadrant_size = 16
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-cell_half_offset = 2
-cell_tile_origin = 0
-cell_y_sort = false
-cell_clip_uv = false
-collision_use_kinematic = false
-collision_friction = 1.0
-collision_bounce = 0.0
-collision_layer = 1
-collision_mask = 1
-occluder_light_mask = 1
-format = 1
-tile_data = PoolIntArray(  )
 script = ExtResource( 18 )
-_sections_unfolded = [ "Cell", "Z Index" ]
 
 [connection signal="pressed" from="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/ButtonCreateWorker" to="CanvasLayer/GUI/Center/VBoxContainer/HPanelContainer/ButtonCreateWorker" method="_on_Button_pressed"]
 

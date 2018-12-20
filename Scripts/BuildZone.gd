@@ -9,7 +9,8 @@ onready var world = get_tree().get_nodes_in_group("WorldGenerator")[0]
 var placed = false
 var constructed = false
 var wood = 0
-var type
+var type = "buildzone"
+var constructing = false
 
 func _ready():
 	add_to_group("BuildZones")
