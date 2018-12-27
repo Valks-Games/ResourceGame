@@ -19,7 +19,7 @@
 [ext_resource path="res://Scripts/ButtonCreateWoodGenerator.gd" type="Script" id=17]
 [ext_resource path="res://Scripts/Label.gd" type="Script" id=18]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 [node name="World" type="Node" parent="." index="0"]
 
@@ -112,7 +112,6 @@ script = ExtResource( 11 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="3"]
 
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0

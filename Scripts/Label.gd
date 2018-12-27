@@ -10,15 +10,20 @@ func _ready():
 	refresh()
 
 func refresh():
-	var worker_count = get_tree().get_nodes_in_group("Workers").size()
+	var worker_count = 0
+	var workers = get_tree().get_nodes_in_group("Units")
+	for i in range(workers.size()):
+		if workers[i].team == "red":
+			worker_count += 1
+	
 	if worker_count == 0:
-		resources.workers = 1
+		resources.workers = 0
 	else:
 		resources.workers = worker_count
 	
-	message.push_back("Wood: " + str(resources.wood) + " / " + str(resources.max_wood))
-	message.push_back("Stone: " + str(resources.stone) + " / " + str(resources.max_stone))
-	message.push_back("Iron: " + str(resources.iron) + " / " + str(resources.max_iron))
+	message.push_back("Wood: " + str(resources.wood))
+	message.push_back("Stone: " + str(resources.stone))
+	message.push_back("Iron: " + str(resources.iron))
 	message.push_back("Workers: " + str(resources.workers) + " / " + str(resources.max_workers))
 	
 	for i in range(message.size()):

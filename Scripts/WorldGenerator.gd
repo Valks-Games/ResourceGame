@@ -2,10 +2,13 @@ extends Node
 
 onready var tree_resource = preload("res://Scenes/Tree.tscn")
 onready var townhall_resource = preload("res://Scenes/Townhall.tscn")
-onready var worker_resource = preload("res://Scenes/Worker.tscn")
+onready var unit_resource = preload("res://Scenes/Unit.tscn")
 onready var player_resource = preload("res://Scenes/Player.tscn")
+onready var structure_resource = preload("res://Scenes/BuildZone.tscn")
 onready var tile_map = get_tree().get_nodes_in_group("TileMap")[0]
 onready var rock_map = get_tree().get_nodes_in_group("RockTiles")[0]
+
+onready var townhall_sprite = preload("res://Sprites/townhall.png")
 
 var width = 100
 var height = 100
@@ -60,7 +63,10 @@ func populate_world():
 				if world_spawn_check(Vector2(x, y)):
 					matrix[x][y] = tree_resource.instance()
 	
-	update_world_cell(Vector2(width / 2, height / 2), townhall_resource.instance())
+	var townhall = structure_resource.instance()
+	townhall.placed = true
+	townhall.get_node("Sprite").texture = townhall_sprite
+	update_world_cell(Vector2(width / 2, height / 2), townhall)
 	update_world_cell(Vector2(width / 2 + 1, height / 2), player)
 	
 	for x in range(width):
@@ -68,6 +74,14 @@ func populate_world():
 			if !world_cell_free(Vector2(x, y)):
 				matrix[x][y].set_position(get_world_coords(Vector2(x, y)))
 				get_parent().call_deferred("add_child", matrix[x][y])
+				
+	# TEMPORARY
+	var enemy = unit_resource.instance()
+	enemy.team = "blue"
+	enemy.command = "find_enemies"
+	enemy.set_position(get_world_coords(Vector2(width / 2, height / 2 + 3)))
+	get_node("Units").call_deferred("add_child", enemy)
+	# TEMPORARY
 				
 	# Player moves so you should be able to build there after!
 	clear_world_cell(Vector2(width / 2 + 1, height / 2))

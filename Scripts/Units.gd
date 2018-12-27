@@ -5,10 +5,10 @@ const Utils = preload("res://Scripts/Utils.gd")
 onready var structures_parent = get_tree().get_nodes_in_group("Structures")[0]
 
 func _ready():
-	add_to_group("Units")
+	add_to_group("UnitController")
 		
 # Accepts the workers as an array and the worker position being checked and the worker sprite.
-func flocking_behaviour(workers, pos, width, target, speed):
+func flocking_behaviour(workers, pos, width, target_position, speed):
 	var velocity = Vector2()
 	
 	var close_workers = Array()
@@ -24,7 +24,7 @@ func flocking_behaviour(workers, pos, width, target, speed):
 	var cohesion_weight = 1
 	var separation_weight = 2.5 #2.5
 	
-	velocity += Utils.calc_target_velocity(pos, target.position, speed)
+	velocity += Utils.calc_target_velocity(pos, target_position, speed)
 	velocity.x += alignment.x * allignment_weight + cohesion.x * cohesion_weight + separation.x * separation_weight
 	velocity.y += alignment.y * allignment_weight + cohesion.y * cohesion_weight + separation.y * separation_weight
 	

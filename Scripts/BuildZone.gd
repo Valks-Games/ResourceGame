@@ -11,9 +11,10 @@ var constructed = false
 var wood = 0
 var type = "buildzone"
 var constructing = false
+var team = "red"
 
 func _ready():
-	add_to_group("BuildZones")
+	add_to_group("Structures")
 	
 func init(type):
 	self.type = type
